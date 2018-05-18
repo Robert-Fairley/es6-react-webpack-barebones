@@ -3,10 +3,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 /** Import our Application */
-import Home from './App'
+import Application from './App'
 
 /** Get the root element */
 const APP_ROOT = document.querySelector('#root');
 
 /** Mount the application to the root element */
-ReactDOM.render(<Home/>, APP_ROOT);
+ReactDOM.render(<Application/>, APP_ROOT);

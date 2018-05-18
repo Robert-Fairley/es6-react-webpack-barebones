@@ -1,80 +1,31 @@
-/**
- * Import React from the React package.
- */
 import React from 'react'
-/**
- * @class Home
- *
- * @classdesc When constructed instantiates a series of elements that build out to
- * a simple counter. The count is held in a state object which is accessed by
- * other methods. When the state object is altered, the UI element containing
- * a visual representation of the state is updated.
- */
-class Home extends React.Component {
-    /** @constructor */
-    constructor(props) {
-        /**
-         * Must be called to inherit properties and methods from
-         * the parent class.
-         */
-        super(props);
 
-        /** Appears in our H1 tag below. */
-        this.greeting = 'Hello, World!';
+class Application extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { subtitle: "This is a subtitle" };
+    this.handleSubtitleClick = this.handleSubtitleClick.bind(this); //event is passed noneless
+  }
+  
+  handleSubtitleClick(event) {
+    if (event.target.value)
+      this.setState({subtitle: event.target.value});
+  }
 
-        /** The count referenced in the DOM */
-        this.state = { count: 0 };
-
-        /**
-         * Bind `this` to the methods used in the DOM so we
-         * don't have to inline them.
-         */
-        this.increaseCount = this.increaseCount.bind(this);
-        this.decreaseCount = this.decreaseCount.bind(this);
-    }
-
-    /**
-     * @method increaseCount
-     * @param e<Event> - Native event object.
-     * @desc Increases the count state by 1.
-     * @returns void
-     */
-    increaseCount(e) {
-        this.setState({
-            count: this.state.count + 1
-        });
-    }
-
-    /**
-     * @method decreaseCount
-     * @param e<Event> - Native event object.
-     * @desc Decreases the count state by 1.
-     * @returns void
-     */
-    decreaseCount(e) {
-        this.setState({
-            count: this.state.count - 1
-        });
-    }
-
-    /**
-     * @method render
-     * @desc Inherited React component function. Renders the JSX DOM elements.
-     * @returns HTMLElement
-     */
-    render() {
-        return (
-            <div className="counter">
-                <h1>{this.greeting}</h1>
-                <div className="count">{this.state.count}</div>
-                <div className="controls">
-                    <button onClick={this.increaseCount}>++</button>
-                    <button onClick={this.decreaseCount}>--</button>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (<div>
+      <h1>Sandbox to play with React</h1>
+      <h2>Updating the sub-title by clicking buttons - passing value</h2>
+      <hr />
+        
+      <Subtitle text={this.state.subtitle} />
+      <button onClick={this.handleSubtitleClick} value="This is subtitle">Click me!!!!</button>
+      <button onClick={this.handleSubtitleClick} value="This is the new subtitle">Click for a new text</button>
+      <button onClick={this.handleSubtitleClick} value="">Empty value button</button>
+    </div>);
+  }
 }
+  
+const Subtitle = ({ text }) => (<h2>{text}</h2>);
 
-
-export default Home
+export default Application
